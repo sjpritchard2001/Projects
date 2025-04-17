@@ -1,0 +1,725 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2024.1" RunE2="T">
+  <Nodes>
+    <Node ToolID="24">
+      <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+        <Position x="282" y="30" width="384" height="40" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Text>Preparing Data and putting it into an operational Database: Unemployment</Text>
+          <Font name="Arial" size="12" style="0" />
+          <TextColor name="Black" />
+          <FillColor name="White" />
+          <Shape shape="0" />
+          <Justification Justification="4" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="41" y="77" width="430" height="309" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Container 5</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="True" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="1">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="66" y="246" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv</File>
+              <FormatSpecificOptions>
+                <HeaderRow>True</HeaderRow>
+                <IgnoreErrors>False</IgnoreErrors>
+                <AllowShareWrite>False</AllowShareWrite>
+                <ImportLine>1</ImportLine>
+                <FieldLen>254</FieldLen>
+                <SingleThreadRead>False</SingleThreadRead>
+                <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+                <Delimeter>,</Delimeter>
+                <QuoteRecordBreak>False</QuoteRecordBreak>
+                <CodePage>28591</CodePage>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>COVID COUNTY.csv</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Report Date" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+                <Field name="Date VDH Notified" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+                <Field name="Status" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+                <Field name="Locality" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+                <Field name="FIPS" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+                <Field name="Facility" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+                <Field name="Facility Type" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+                <Field name="Cases" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+                <Field name="Deaths" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+                <Field name="Active" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\COVID COUNTY.csv" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="2">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="138" y="210" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="DateTimeParse([Report Date], &quot;%m/%d/%y&quot;)" field="ReportDateNew" size="10" type="Date" enabled="true" />
+                <FormulaField expression="DateTimeParse([Date VDH Notified], &quot;%m/%d/%y&quot;)" field="Date VDH Notified New" size="10" type="Date" enabled="true" />
+                <FormulaField expression="DateTimeYear([ReportDateNew])" field="ReportYear" size="64" type="String" enabled="true" />
+                <FormulaField expression="Replace([Cases], &quot;*&quot;, &quot;&quot;)" field="Cases" size="254" type="V_String" enabled="true" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>ReportDateNew = DateTimeParse([Report Date], "%m/%d/%y")
+Date VDH Notified New =...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="3">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.RecordID.RecordID">
+            <Position x="246" y="186" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FieldName>RecordID</FieldName>
+              <StartValue>1</StartValue>
+              <FieldType>Int32</FieldType>
+              <FieldSize>6</FieldSize>
+              <Position>0</Position>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRecordID" />
+        </Node>
+        <Node ToolID="4">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+            <Position x="342" y="150" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <File />
+              <Passwords />
+              <Disable>False</Disable>
+              <FormatSpecificOptions UseDcm="true" MaxRecords="" Format="23">
+                <TableStyle>Quoted</TableStyle>
+                <TransactionMessages>False</TransactionMessages>
+                <Table>covid_data</Table>
+                <IgnoreDropTableSQLErrors>False</IgnoreDropTableSQLErrors>
+                <OutputOption>Create</OutputOption>
+                <Connection DcmType="ConnectionId">cc2f8bc9-0155-458c-8682-188e819aa33f</Connection>
+                <PostSQL>ALTER TABLE `unemployment`.`covid_data` 
+CHANGE COLUMN `RecordID` `RecordID` INT NOT NULL ,
+ADD PRIMARY KEY (`RecordID`);
+;</PostSQL>
+                <TransactionSize>10000</TransactionSize>
+                <PreSQL>use unemployment;
+drop table if exists covid_data;</PreSQL>
+              </FormatSpecificOptions>
+              <MultiFile value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>dcm:VAULT — VAULT
+Table=covid_data</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+        </Node>
+        <Node ToolID="20">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="150" y="126" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Cleaning Covid Data</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="19">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="533" y="401" width="474" height="231" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Container 19</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="True" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="15">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="558" y="486" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">C:\Users\samha\Downloads\Data and WorkFlows\Unemployment_County.xlsx|||`Sheet2$`</File>
+              <FormatSpecificOptions>
+                <FirstRowData>False</FirstRowData>
+                <ImportLine>1</ImportLine>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Unemployment_County.xlsx
+Query=`Sheet2$`</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="FIPS " size="255" source="File: C:\Users\samha\Downloads\Data and WorkFlows\Unemployment_County.xlsx|||`Sheet2$`" type="V_String" />
+                <Field name="Locality" size="255" source="File: C:\Users\samha\Downloads\Data and WorkFlows\Unemployment_County.xlsx|||`Sheet2$`" type="V_String" />
+                <Field name="Year" source="File: C:\Users\samha\Downloads\Data and WorkFlows\Unemployment_County.xlsx|||`Sheet2$`" type="Double" />
+                <Field name="Unemployment Rate" source="File: C:\Users\samha\Downloads\Data and WorkFlows\Unemployment_County.xlsx|||`Sheet2$`" type="Double" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="16">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.RecordID.RecordID">
+            <Position x="642" y="486" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FieldName>RecordID</FieldName>
+              <StartValue>1</StartValue>
+              <FieldType>Int32</FieldType>
+              <FieldSize>6</FieldSize>
+              <Position>0</Position>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRecordID" />
+        </Node>
+        <Node ToolID="17">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="762" y="486" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="FIPS " selected="True" rename="FIPSCode" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="18">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+            <Position x="882" y="486" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <File />
+              <Passwords />
+              <Disable>False</Disable>
+              <FormatSpecificOptions UseDcm="true" MaxRecords="" Format="23">
+                <TableStyle>Quoted</TableStyle>
+                <TransactionMessages>False</TransactionMessages>
+                <Table>unemployment_county</Table>
+                <IgnoreDropTableSQLErrors>False</IgnoreDropTableSQLErrors>
+                <OutputOption>Create</OutputOption>
+                <Connection DcmType="ConnectionId">cc2f8bc9-0155-458c-8682-188e819aa33f</Connection>
+                <PostSQL>ALTER TABLE `unemployment`.`unemployment_county` 
+CHANGE COLUMN `RecordID` `RecordID` INT NOT NULL ,
+ADD PRIMARY KEY (`RecordID`);
+;</PostSQL>
+                <TransactionSize>10000</TransactionSize>
+                <PreSQL>use unemployment;
+drop table if exists unemployment_county;</PreSQL>
+              </FormatSpecificOptions>
+              <MultiFile value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>dcm:VAULT — VAULT
+Table=unemployment_county</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+        </Node>
+        <Node ToolID="23">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="714" y="450" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Cleaning Unemployment by County Data</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="533" y="149" width="306" height="231" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Container 14</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="True" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="11">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="558" y="234" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv</File>
+              <FormatSpecificOptions>
+                <HeaderRow>True</HeaderRow>
+                <IgnoreErrors>False</IgnoreErrors>
+                <AllowShareWrite>False</AllowShareWrite>
+                <ImportLine>1</ImportLine>
+                <FieldLen>254</FieldLen>
+                <SingleThreadRead>False</SingleThreadRead>
+                <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+                <Delimeter>,</Delimeter>
+                <QuoteRecordBreak>False</QuoteRecordBreak>
+                <CodePage>28591</CodePage>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>UNEMPLOYMENT DATA DEMOGRAPHICS.csv</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Year" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="StateFIPSCode" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="StateName" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="GroupCode" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="PopulationGroup" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="CivilianNonInstitutionalPopulation" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="CivilianLaborForce" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="CivilianLaborForcePercentOfPopulation" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="CivilianLaborForceEmployed" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="CivilianLaborForceEmployedPercentOfPopulation" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="CivilianLaborForceUnemployed" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="CivilianLaborForceUnemployedRate" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+                <Field name="ErrorRangeOfRate" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\UNEMPLOYMENT DATA DEMOGRAPHICS.csv" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="12">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.RecordID.RecordID">
+            <Position x="618" y="234" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FieldName>RecordID</FieldName>
+              <StartValue>1</StartValue>
+              <FieldType>Int32</FieldType>
+              <FieldSize>6</FieldSize>
+              <Position>0</Position>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRecordID" />
+        </Node>
+        <Node ToolID="13">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+            <Position x="714" y="234" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <File />
+              <Passwords />
+              <Disable>False</Disable>
+              <FormatSpecificOptions UseDcm="true" MaxRecords="" Format="23">
+                <TableStyle>Quoted</TableStyle>
+                <TransactionMessages>False</TransactionMessages>
+                <Table>unemployment_demo</Table>
+                <IgnoreDropTableSQLErrors>False</IgnoreDropTableSQLErrors>
+                <OutputOption>Create</OutputOption>
+                <Connection DcmType="ConnectionId">cc2f8bc9-0155-458c-8682-188e819aa33f</Connection>
+                <PostSQL>ALTER TABLE `unemployment`.`unemployment_demo` 
+CHANGE COLUMN `RecordID` `RecordID` INT NOT NULL ,
+ADD PRIMARY KEY (`RecordID`);
+;</PostSQL>
+                <TransactionSize>10000</TransactionSize>
+                <PreSQL>use unemployment;
+drop table if exists unemployment_demo;</PreSQL>
+              </FormatSpecificOptions>
+              <MultiFile value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>dcm:VAULT — VAULT
+Table=unemployment_demo</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+        </Node>
+        <Node ToolID="21">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="630" y="198" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Cleaning Unemployment Data</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="0" y="401" width="474" height="216" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Container 10</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="True" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="6">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="24" y="486" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\samha\Downloads\Data and WorkFlows\FOOD BANK DATA.csv</File>
+              <FormatSpecificOptions>
+                <HeaderRow>True</HeaderRow>
+                <IgnoreErrors>False</IgnoreErrors>
+                <AllowShareWrite>False</AllowShareWrite>
+                <ImportLine>1</ImportLine>
+                <FieldLen>254</FieldLen>
+                <SingleThreadRead>False</SingleThreadRead>
+                <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+                <Delimeter>,</Delimeter>
+                <QuoteRecordBreak>False</QuoteRecordBreak>
+                <CodePage>28591</CodePage>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>FOOD BANK DATA.csv</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Year" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\FOOD BANK DATA.csv" type="V_String" />
+                <Field name="Month" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\FOOD BANK DATA.csv" type="V_String" />
+                <Field name="Locality" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\FOOD BANK DATA.csv" type="V_String" />
+                <Field name="Households Served" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\FOOD BANK DATA.csv" type="V_String" />
+                <Field name="Individuals Served" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\FOOD BANK DATA.csv" type="V_String" />
+                <Field name="Pounds of Food Distributed" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\FOOD BANK DATA.csv" type="V_String" />
+                <Field name="Children Served via non-federal child nutrition programs" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\FOOD BANK DATA.csv" type="V_String" />
+                <Field name="Pounds of food distributed via non-federal child nutrition programs" size="254" source="File: C:\Users\samha\Downloads\Data and WorkFlows\FOOD BANK DATA.csv" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="7">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.RecordID.RecordID">
+            <Position x="97" y="486" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FieldName>RecordID</FieldName>
+              <StartValue>1</StartValue>
+              <FieldType>Int32</FieldType>
+              <FieldSize>6</FieldSize>
+              <Position>0</Position>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRecordID" />
+        </Node>
+        <Node ToolID="8">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="217" y="486" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Households Served" selected="False" />
+                <SelectField field="Individuals Served" selected="False" />
+                <SelectField field="Children Served via non-federal child nutrition programs" selected="False" />
+                <SelectField field="Pounds of food distributed via non-federal child nutrition programs" selected="False" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="9">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+            <Position x="349" y="486" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <File />
+              <Passwords />
+              <Disable>False</Disable>
+              <FormatSpecificOptions UseDcm="true" MaxRecords="" Format="23">
+                <TableStyle>Quoted</TableStyle>
+                <TransactionMessages>False</TransactionMessages>
+                <Table>food_data</Table>
+                <IgnoreDropTableSQLErrors>False</IgnoreDropTableSQLErrors>
+                <OutputOption>Create</OutputOption>
+                <Connection DcmType="ConnectionId">cc2f8bc9-0155-458c-8682-188e819aa33f</Connection>
+                <PostSQL>ALTER TABLE `unemployment`.`food_data` 
+CHANGE COLUMN `RecordID` `RecordID` INT NOT NULL ,
+ADD PRIMARY KEY (`RecordID`);
+;</PostSQL>
+                <TransactionSize>10000</TransactionSize>
+                <PreSQL>use unemployment;
+drop table if exists food_data;</PreSQL>
+              </FormatSpecificOptions>
+              <MultiFile value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>dcm:VAULT — VAULT
+Table=food_data</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+        </Node>
+        <Node ToolID="22">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="193" y="450" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Cleaning Food Data</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Output" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="16" Connection="Output" />
+      <Destination ToolID="17" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="17" Connection="Output" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="13" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <IsTemplate value="False" />
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Cleaning Unemployment</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="346ff152-e4dc-4669-9d35-4907d702fa2e" />
+      <Telemetry>
+        <PreviousWorkflowId value="4406e456-59c0-4883-a4d7-96fb12681489" />
+        <OriginWorkflowId value="4406e456-59c0-4883-a4d7-96fb12681489" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
